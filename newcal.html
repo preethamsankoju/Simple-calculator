@@ -1,0 +1,125 @@
+<!Doctype html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Simple Calculator</title>
+    <style> 
+body { background-color: #f2f2f2; 
+	font-family: Arial, sans-serif; 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+	height: 100vh; 
+	}
+
+    .Calculator { 
+	background: #fff; 
+	padding: 20px; 
+	border-radius: 10px; 
+	box-shadow: 2px 2px 12px rgba(0,0,0,0.1); 
+	width: 240px; 
+	}
+
+    .display { 
+	width: 100%; 
+	height: 50px; 
+	font-size: 22px; 
+	text-align: right; 	
+	padding: 10px; 
+	margin-bottom: 10px; 
+	border: 1px solid #ccc; 
+	border-radius: 5px; 	
+	background-color: #eaeaea; 
+	}
+
+    .buttons { 
+	display: grid; 
+	grid-template-columns: repeat(4, 1fr); 
+	gap: 8px; 
+	}
+
+    button { 
+	padding: 15px; 
+	font-size: 16px; 
+	border: none; 
+	border-radius: 5px; 
+	background-color: #ddd; 
+	cursor: pointer; }
+
+    button:hover { 	
+	background-color: #bbb; 
+	}
+
+    .operator { 
+	background-color: #ffb347; 
+	}
+
+    .equal { 
+	background-color: #4caf50; 
+	color: white; 
+	}
+
+    .clear {
+	 background-color: #f44336; 	
+	color: white; 
+	}
+  </style>
+</head> 
+<body> 
+    <div class="calculator"> 
+        <!-- Input field for displaying a result or expression --> 
+         <input type="text" id="calcDisplay" class="display" disabled />
+
+    <!-- Buttons layout --> 
+     <div class="buttons"> 
+        <button onclick="clearCalculator()" class="clear">C</button> 
+        <button onclick="addToExpression('(')">(</button>
+        <button onclick="addToExpression(')')">)</button>
+        <button onclick="addToExpression('/')" class="operator">÷</button>
+
+        <button onclick="addToExpression('7')">7</button>
+        <button onclick="addToExpression('8')">8</button>
+        <button onclick="addToExpression('9')">9</button>
+        <button onclick="addToExpression('*')" class="operator">×</button>
+
+        <button onclick="addToExpression('4')">4</button>
+        <button onclick="addToExpression('5')">5</button>
+        <button onclick="addToExpression('6')">6</button>
+        <button onclick="addToExpression('-')" class="operator">−</button>
+
+        <button onclick="addToExpression('1')">1</button> 
+        <button onclick="addToExpression('2')">2</button>
+        <button onclick="addToExpression('3')">3</button> 
+        <button onclick="addToExpression('+')" class="operator">+</button>
+
+        <button onclick="addToExpression('0')">0</button> 
+        <button onclick="addToExpression('.')">.</button>
+        <button onclick="computeResult()" class="equal">=</button> </div>
+
+  <script> 
+    const display = document.getElementById("calcDisplay");
+
+    // Add the value that was clicked to the display using the 
+    function addToExpression(value) { 
+        display.value += value; 
+    }
+
+    // Make the display field 
+    function clearCalculator() { 
+        display.value = ""; 
+    }
+
+    // Safely evaluate the expression
+    function computeResult() { 
+        try {
+            // As a safer option to eval, use the Function constructor 
+            const result = new Function('return ' + display.value)();
+            display.value = result;
+            } catch (err) { 
+            display.value = "Error";
+             } 
+            }
+  </script> 
+  </body> 
+  </html>
